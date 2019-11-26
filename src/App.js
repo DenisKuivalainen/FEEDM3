@@ -178,6 +178,7 @@ class App extends React.Component {
           {this.Field3()}
 
           <div class="border col-0  "/>
+        {this.easter()}
         </div>
         
         
@@ -189,6 +190,12 @@ class App extends React.Component {
         </div>
       </div>
     );
+  }
+
+  easter() {
+    let egg = this.state.inp1 + this.state.inp2 + this.state.inp3;
+    if(egg === 'ggggggggggggggggggggggggggggggggggggggggggggg') {window.open('https://github.com/DenisKuivalainen/softdevproj')}
+    if(egg === 'diisgodlike') {window.open('https://www.instagram.com/di_is_godlike_/')}
   }
 }
 
