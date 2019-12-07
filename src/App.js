@@ -14,7 +14,7 @@ class App extends React.Component {
       name: '',
       url: "",
     }
-    this.FromServ = this.FromServ.bind(this);
+    this.fromServ = this.fromServ.bind(this);
     this.keydownHandler = this.keydownHandler.bind(this);
   }
 
@@ -38,7 +38,7 @@ class App extends React.Component {
   }
 
   //Выводим рецепт
-  field_recp() {
+  fieldRecipe() {
     if (this.state.recp !== '') {
       return(
         <div class="jumbotron jumbotron-fluid">
@@ -52,8 +52,8 @@ class App extends React.Component {
   }
 
   //Записываем API и обнуляем ингридиенты
-  FromServ() {
-    let urlstr = "http://79.141.152.102/back.php?ing1=" + this.state.inp1 + "&ing2=" + this.state.inp2 + "&ing3=" + this.state.inp3;
+  fromServ() {
+    let urlstr = "http://185.146.12.243/back.php?ing1=" + this.state.inp1 + "&ing2=" + this.state.inp2 + "&ing3=" + this.state.inp3;
     this.setState({ 
       inp1 : '',
       inp2 : '',
@@ -68,8 +68,7 @@ class App extends React.Component {
   componentDidUpdate() {
     if (this.state.url !== '') {
       const urll = this.state.url
-      fetch(urll).then(res => res.json()).then(json => {
-        //console.log(json[0].Id);
+      fetch(urll).then(res =>res.json()).then(json => {
         this.setState({ 
           recp: json[0].Description,
           name : json[0].Name,
@@ -80,7 +79,7 @@ class App extends React.Component {
   }
 
   //Выводим форму для ингридиента 2
-  Field2() {
+  fieldOptional1() {
     var stt2
     if (this.state.inp1 !== '') {
       stt2 = "fadein"
@@ -99,7 +98,7 @@ class App extends React.Component {
   }
 
   //Выводим форму для ингридиента 3
-  Field3() {
+  fieldOptional2() {
     var stt3
     if (this.state.inp1 !== '' && this.state.inp2 !== '') {
       stt3 = "fadein"
@@ -120,7 +119,7 @@ class App extends React.Component {
   // Активация по Enter
   keydownHandler(e){
     if(e.keyCode===13) {
-      let urlstr = "http://79.141.152.102/back.php?ing1=" + this.state.inp1 + "&ing2=" + this.state.inp2 + "&ing3=" + this.state.inp3;
+      let urlstr = "http://185.146.12.243/back.php?ing1=" + this.state.inp1 + "&ing2=" + this.state.inp2 + "&ing3=" + this.state.inp3;
       this.setState({ 
         inp1 : '',
         inp2 : '',
@@ -151,7 +150,7 @@ class App extends React.Component {
         {/* Рецепт */}
         <div class="row  "> 
           <div class="col-lg-12 col-12 ">
-            {this.field_recp()}
+            {this.fieldRecipe()}
           </div>
         </div>
 
@@ -160,7 +159,7 @@ class App extends React.Component {
 
           {/* Кнопка */}
           <div class="col-lg-3 col-12 hrow" >
-            <button class="btn btn-outline-secondary " type="button" onClick={this.FromServ}>Search recipe</button>
+            <button class="btn btn-outline-secondary " type="button" onClick={this.fromServ}>Search recipe</button>
           </div>
 
           {/* Поле ввода 1 */}
@@ -172,10 +171,10 @@ class App extends React.Component {
           </div>
           
           {/* Поле ввода 2 */}
-          {this.Field2()}
+          {this.fieldOptional1()}
 
           {/* Поле ввода 3 */}
-          {this.Field3()}
+          {this.fieldOptional2()}
 
           <div class="border col-0  "/>
         {this.easter()}
