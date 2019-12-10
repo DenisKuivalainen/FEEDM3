@@ -141,7 +141,7 @@ class App extends React.Component {
       <div className="App" class="hhrow">
 
         {/* Логотип */}
-        <div class="row  "> 
+        <div class="row"> 
           <div class="col-lg-12 col-12 llogo">
             {this.logo()}
           </div>
@@ -155,10 +155,9 @@ class App extends React.Component {
         </div>
 
         <div class="row  "> 
-          <div class="border col-0"/>
 
           {/* Кнопка */}
-          <div class="col-lg-3 col-12 hrow" >
+          <div class="col-lg-3 col-12" >
             <button class="btn btn-outline-secondary " type="button" onClick={this.fromServ}>Search recipe</button>
           </div>
 
@@ -183,7 +182,7 @@ class App extends React.Component {
         
         {/* Прочая ересь */}
         <div class="row"> 
-          <div class="col-lg-12 col-12 textt dno">
+          <div class="col-lg-12 col-12 textt">
             <span class="lead leadd">2019   D.E.V.&#169;</span>
           </div>
         </div>

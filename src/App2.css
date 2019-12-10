@@ -1,29 +1,34 @@
 @media (min-width: 992px) {
  
-    /* .col-12  {
-      padding-left: 6% !important;
-      padding-right: 6% !important;
-      padding-top: 2% !important;
-      padding-bottom: 2% !important;
-      width: 80% !important;
-      align-self: center !important;
-    } */
+
+    .row {
+      padding-left: 6%;
+      padding-right: 6%;
+      margin-right: 0 !important;
+      margin-left: 0 !important;
+    }
 
     .col-lg-3 {
-        max-width: 20%;
+        max-width: 100%;
     }
   
-    /* .leadd {
-      font-size: 75% !important;
-    } */
+    .leadd {
+      font-size: 150% !important;
+    }
   
+    .form-control {
+      font-size: 150% !important;
+    }
+
     .fatfont {
+      font-size: 150% !important;
       font-weight: bold !important;
+      width: 100%;
     }
   
     .pict { 
-      padding-left: 5% !important;
-      padding-right: 5% !important;
+      padding-left: 30% !important;
+      padding-right: 30% !important;
       padding-top: 4% !important;
       padding-bottom: 4% !important;
       width: 100% !important;
@@ -31,6 +36,7 @@
   
     .btn-outline-secondary {
       width: 100%;
+      font-size: 150% !important;
     }
   
     .jumbotron {
@@ -38,7 +44,7 @@
     }
   
     .jumbotron-fluid {
-      margin-bottom: 2%;
+      margin-bottom: 5%;
     }
   
     p {
@@ -47,8 +53,10 @@
     }
   
     .container {
-      padding-right: 4% !important;
-      padding-left: 4% !important;
+      padding-right: 2% !important;
+      padding-left: 2% !important;
+      /* margin-left: 2% !important;
+      margin-right: 2% !important; */
     }
   
     .col-0 {
@@ -77,9 +85,11 @@
       bottom: 0 !important;
       width: 100% !important;
       background-color: white;
+      padding-right: 12%;
    }
    
     .llogo {
       align-self: center !important;
+      height: 10% !important;
     }
   }
