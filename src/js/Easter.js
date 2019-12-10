@@ -3,7 +3,7 @@ export function egg(inp1, inp2, inp3) {
     if(egg === 'ggggggggggggggggggggggggggggggggggggggggggggg') {window.open('https://github.com/DenisKuivalainen/softdevproj')}
     if(egg === 'diisgodlike') {window.open('https://www.instagram.com/di_is_godlike_/')}
 
-    
+
     // ░░░░░░░░░▄░░░░░░░░░░░░░░▄░░░░
     // ░░░░░░░░▌▒█░░░░░░░░░░░▄▀▒▌░░░
     // ░░░░░░░░▌▒▒█░░░░░░░░▄▀▒▒▒▐░░░
@@ -23,4 +23,5 @@ export function egg(inp1, inp2, inp3) {
     // ░░░░▀▄▒▒▒▒▒▒▒▒▒▒▄▄▄▀▒▒▒▒▄▀░░░
     // ░░░░░░▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀░░░░░
     // ░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▀▀░░░░░░░░
+    
 }
