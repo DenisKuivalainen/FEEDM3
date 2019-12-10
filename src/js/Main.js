@@ -16,7 +16,7 @@ class Main extends React.Component {
 
     // Нажали на кнопку
     clicked = () => {
-        let url = "http://185.146.12.243/back1.php?ing1=" + this.state.inp1 + "&ing2=" + this.state.inp2 + "&ing3=" + this.state.inp3;
+        let url = "http://185.146.12.243/back.php?ing1=" + this.state.inp1 + "&ing2=" + this.state.inp2 + "&ing3=" + this.state.inp3;
         this.setState({url : url, inp1 : '', inp2 : '', inp3 : '', refresh : !this.state.refresh});
     }
 
