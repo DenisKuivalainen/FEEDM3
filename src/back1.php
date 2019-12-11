@@ -57,7 +57,7 @@
 	while($row = $stmt->fetch()) {
         $tojs[] = $row;
         $newId = $row["Id"];
-        $conn->query("INSERT INTO summon (Id, summonId, summonTime, sDescr) Select (max(Id) + 1), " . $newId . ", now(), '' from summon;");
+        $conn->query("INSERT INTO summon (Id, summonId, summonTime, sDescr) Select (max(Id) + 1), " . $newId . ", now(), 'Updating FE' from summon;");
     }
 
     // Ответила ли база
