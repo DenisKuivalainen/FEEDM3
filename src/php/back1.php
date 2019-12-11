@@ -1,7 +1,7 @@
 ﻿<?php
-    $user="pi";
-    $pass="MariaPass";
-    $conn = new mysqli("localhost", "pi", "MariaPass", "DEVdb");
+    $user="***";
+    $pass="***";
+    $conn = new mysqli("localhost", $user, $pass, "DEVdb");
     $pdo = new PDO('mysql:host=localhost;dbname=DEVdb', $user, $pass);
     $a = $_GET['ing1'];
     $b = $_GET['ing2'];
