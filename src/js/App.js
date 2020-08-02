@@ -27,7 +27,7 @@ class App extends React.Component {
                 {/* Прочая ересь */}
                 <div className="row"> 
                     <div class="col-lg-12 col-12 textt">
-                        <span class="lead leadd">2019   D.E.V.&#169;</span>
+                        <span class="lead leadd">2020   &#169;   Godlike</span>
                     </div>
                 </div>
             </div>

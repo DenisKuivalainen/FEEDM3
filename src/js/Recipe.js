@@ -13,9 +13,11 @@ class Recipe extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.refresh !== this.props.refresh) {
+            this.props.lock(false);
             const URL = this.props.url;
             fetch(URL).then(res => res.json()).then(json => {
-                this.setState({ name: json[0].Name,  description: json[0].Description,});
+                this.setState({ name: json.top,  description: json.dis});
+                this.props.lock(true);
             });
         }
     }

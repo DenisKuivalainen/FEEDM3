@@ -10,14 +10,17 @@ class Main extends React.Component {
       super(props);
       this.state = {
         inp1 : '', inp2 : '', inp3 : '',
-        url : '', refresh : true,
+        url : '', refresh : true, unlock: true,
       }
+      this.lock=this.lock.bind(this)
     }
 
     // Нажали на кнопку
     clicked = () => {
-        let url = "http://185.146.12.243/back.php?ing1=" + this.state.inp1 + "&ing2=" + this.state.inp2 + "&ing3=" + this.state.inp3;
-        this.setState({url : url, inp1 : '', inp2 : '', inp3 : '', refresh : !this.state.refresh});
+        if(this.state.unlock) {
+            let url = "/recp?ing1=" + this.state.inp1 + "&ing2=" + this.state.inp2 + "&ing3=" + this.state.inp3;
+            this.setState({url : url, inp1 : '', inp2 : '', inp3 : '', refresh : !this.state.refresh});
+        }
     }
 
     // Активация по Enter
@@ -43,6 +46,10 @@ class Main extends React.Component {
         if (this.state.inp2==='') {this.setState({inp3: ''})};
     }
 
+    lock(t) {
+        this.setState({unlock: t});
+    }
+
     //----------------------------------------------------------------------------------------------------------------------------------------------
     //-------R-E-N-D-E-R-I-N-G-!-!-!----------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,7 +59,7 @@ class Main extends React.Component {
         return (
             <div>
                 {/* Рецепт */}
-                <Recipe url = {this.state.url} refresh = {this.state.refresh} />
+                <Recipe url = {this.state.url} refresh = {this.state.refresh} lock={this.lock} />
         
                 <div class="row"> 
         

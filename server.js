@@ -1,41 +1,44 @@
 const express = require('express');
-const mysql = require('mysql2');
-const path = require('path');
+const { Client } = require('pg');
 const db = require('./db');
+const qwr = require('./query')
+const path = require('path');
+
 const port = process.env.PORT || 8080;
- 
 const app = express();
+const cred = {
+    connectionString: db.getDB(),
+    ssl: {
+      rejectUnauthorized: false
+    }
+};
+const errRes = {
+    top: 'No results...',
+  dis: 'Sorry, no results were found... Please, try again... \nYou cannot give up just yet... \nStay DETERMINED!!!' 
+}
  
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('/back', function (req, res) {
-    console.log(1)
-    res.send();
-});
+app.get('/recp', function (req, res) {
+    let client = new Client(cred);
+    client.connect();
 
-app.get('/test', function (req, res) {
-var connection = mysql.createConnection(db.getDB());
+    let text = qwr.t(req);
+    let values = qwr.v(req);
+    
 
-    connection.connect(function(err){
+    client.query(text, values, (err, resp) => {
         if (err) {
-          return console.error("Ошибка: " + err.message);
+            console.log(err);
         }
-        else{
-          console.log("Подключение к серверу MySQL успешно установлено");
-        }
-     });
-     // закрытие подключения
-     connection.end(function(err) {
-      if (err) {
-        return console.log("Ошибка: " + err.message);
-      }
-      console.log("Подключение закрыто");
+        client.end();
+        res.send(JSON.stringify((resp.rows[0] !== undefined) ? resp.rows[0] : errRes));
     });
-    res.send();
 });
+
  
-// app.get('/*', function (req, res) {
-//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
-// });
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 app.listen(port);
