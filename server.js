@@ -37,6 +37,23 @@ app.get('/recp', function (req, res) {
     });
 });
 
+app.get('/vue', function (req, res) {
+    let client = new Client(cred);
+    client.connect();
+
+    let text = qwr.t(req);
+    let values = qwr.v(req);
+    
+
+    client.query(text, values, (err, resp) => {
+        if (err) {
+            console.log(err);
+        }
+        client.end();
+        res.send(JSON.stringify((resp.rows[0] !== undefined) ? resp.rows : errRes));
+    });
+});
+
  
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));

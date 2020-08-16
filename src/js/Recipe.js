@@ -7,7 +7,7 @@ class Recipe extends React.Component {
       super(props);
       this.state = {
         name: 'Welcome to our cooking book!!!',
-        description: 'You can find anu recipe you want using up to 3 ingredients!!! Unfortunaatelly, you can use only 6 ingredients: potato, rice, tomatoes, cream, meat and paprika.',
+        description: 'You can find any recipe you want using up to 3 ingredients!!! Unfortunaatelly, you can use only 6 ingredients: potato, rice, tomatoes, cream, meat and paprika.',
       }
     }
 
