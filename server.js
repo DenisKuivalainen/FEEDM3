@@ -16,6 +16,8 @@ const errRes = {
     top: 'No results...',
   dis: 'Sorry, no results were found... Please, try again... \nYou cannot give up just yet... \nStay DETERMINED!!!' 
 }
+
+const errRes2 = [errRes];
  
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
@@ -50,7 +52,7 @@ app.get('/vue', function (req, res) {
             console.log(err);
         }
         client.end();
-        res.send(JSON.stringify((resp.rows[0] !== undefined) ? resp.rows : errRes));
+        res.send(JSON.stringify((resp.rows[0] !== undefined) ? resp.rows : errRes2));
     });
 });
 
