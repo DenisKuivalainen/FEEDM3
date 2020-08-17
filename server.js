@@ -3,6 +3,7 @@ const { Client } = require('pg');
 const db = require('./db');
 const qwr = require('./query')
 const path = require('path');
+const fs = require('fs');
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -12,12 +13,11 @@ const cred = {
       rejectUnauthorized: false
     }
 };
+
 const errRes = {
     top: 'No results...',
-  dis: 'Sorry, no results were found... Please, try again... \nYou cannot give up just yet... \nStay DETERMINED!!!' 
+  dis: 'Sorry, no results were found... Please, try again... You cannot give up just yet... Stay DETERMINED!!!' 
 }
-
-const errRes2 = [errRes];
  
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
@@ -52,12 +52,18 @@ app.get('/vue', function (req, res) {
             console.log(err);
         }
         client.end();
-        res.send(JSON.stringify((resp.rows[0] !== undefined) ? resp.rows : errRes2));
+        res.send(JSON.stringify((resp.rows[0] !== undefined) ? resp.rows : [errRes]));
     });
 });
 
+app.get('/download', function (req, res) {
+    let file = "FEEDM3.apk";
+    let fPath = path.join(__dirname, file);
+    res.download(fPath);
+});
  
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
 app.listen(port);
