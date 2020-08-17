@@ -39,6 +39,10 @@ app.get('/recp', function (req, res) {
     });
 });
 
+app.get('/check', function (req, res) {
+    res.send(req.ip);
+});
+
 app.get('/vue', function (req, res) {
     let client = new Client(cred);
     client.connect();
