@@ -14,17 +14,17 @@ class App extends React.Component {
         return (
             <div className="App" class="hhrow">
     
-                {/* Логотип */}
+                {/* Logo */}
                 <div className="row"> 
                     <div className="col-lg-12 col-12 llogo">
                         <Logo />
                     </div>
                 </div>  
         
-                {/* Основные поля */}
+                {/* Main fields */}
                 <Main />
 
-                {/* Прочая ересь */}
+                {/* Other things */}
                 <div className="row"> 
                     <div class="col-lg-12 col-12 textt">
                         <span class="lead leadd">2020   &#169;   Godlike</span>

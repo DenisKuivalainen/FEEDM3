@@ -12,10 +12,10 @@ class Main extends React.Component {
         inp1 : '', inp2 : '', inp3 : '',
         url : '', refresh : true, unlock: true,
       }
-      this.lock=this.lock.bind(this)
+      this.lockButton=this.lockButton.bind(this)
     }
 
-    // Нажали на кнопку
+    // Button pressed
     clicked = () => {
         if(this.state.unlock) {
             let url = "/recp?ing1=" + this.state.inp1 + "&ing2=" + this.state.inp2 + "&ing3=" + this.state.inp3;
@@ -23,7 +23,7 @@ class Main extends React.Component {
         }
     }
 
-    // Активация по Enter
+    // Search on Enter
     keydownHandler = (e) => {
         if(e.keyCode===13) {this.clicked()}
     }
@@ -34,7 +34,7 @@ class Main extends React.Component {
         document.removeEventListener('keydown',this.keydownHandler);
     }
 
-    //Запоминаем ингридиенты
+    // Handle ingredients
     handleUserInput = (e) => {
         const name = e.target.name;
         var value = e.target.value.toLowerCase();
@@ -46,7 +46,7 @@ class Main extends React.Component {
         if (this.state.inp2==='') {this.setState({inp3: ''})};
     }
 
-    lock(t) {
+    lockButton(t) {
         this.setState({unlock: t});
     }
 
@@ -59,7 +59,7 @@ class Main extends React.Component {
         return (
             <div>
                 {/* Рецепт */}
-                <Recipe url = {this.state.url} refresh = {this.state.refresh} lock={this.lock} />
+                <Recipe url = {this.state.url} refresh = {this.state.refresh} lockButton={this.lockButton} />
         
                 <div class="row"> 
         
