@@ -112,3 +112,18 @@
     color: white;
     transition: 0.05s;
 }
+
+.bottom-credentials {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    align-self: center;
+}
+
+.bottom-text {
+    text-decoration: none;
+    color: #1e394f;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}

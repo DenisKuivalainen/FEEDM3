@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import Logo from '../logo/Logo';
+import params from './Styles/Params';
 
 import './App.css';
 
@@ -12,19 +12,21 @@ class App extends React.Component {
     }
 
     render() {
+        let screenWidth = params("vw");
+        let screenHeight = params("vh");
         return (
             <div className="App">
-                <div className={CLASSES.root}>
+                <div className={{width: screenWidth, maxWidth: screenWidth, height: screenHeight, maxHeight: screenHeight}}>
                     <Grid container spacing={0}>
-                        <Grid item xs={12}>
-                        <Paper className={CLASSES.paper}>xs=12</Paper>
-                        </Grid>
                         <Grid item xs={4}>
-                            <Grid container spacing={3}>
+                            <Grid container spacing={0}>
                                 <Grid item xs={12}>
-                                <div class="search-btn" >
-                                    Search recipe
-                                </div>
+                                    <Logo />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <div class="search-btn" >
+                                        Search recipe
+                                    </div>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <input class="ing-input" placeholder="Enter ingredient" />
@@ -53,6 +55,11 @@ class App extends React.Component {
                                 </Grid>
                             </Grid>
                         </Grid>
+                        <Grid item xs={12}>
+                            <div class="bottom-credentials">
+                                <a href="https://github.com/DenisKuivalainen/softdevproj" class="bottom-text">2020   &#169;   Godlike</a>
+                            </div>
+                        </Grid>
                     </Grid>
                 </div>
             </div>
@@ -67,22 +74,5 @@ function CardItem() {
         </div>
       );
 }
-
-const CLASSES = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-    root: {
-        maxWidth: 345,
-      },
-      media: {
-        height: 140,
-      },
-  }));
 
 export default App;
