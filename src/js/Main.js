@@ -1,100 +1,69 @@
 import React from 'react';
-import '../css/App1.css';
-import '../css/App2.css';
-import Recipe from './Recipe';
-import {stylo2, stylo3} from './Stylo';
-import {egg} from './Easter';
+import Search from './Content/Search';
+import Results from './Content/Results';
+// import BadBatch from './Content/BadBatch';
+// import RecipeFull from './Content/RecipeFull';
+// import Recipel from './Content/Recipe';
+import {StylesProvider} from './Utility/StylesProvider';
 
 class Main extends React.Component {
     constructor (props) {
       super(props);
-      this.state = {
-        inp1 : '', inp2 : '', inp3 : '',
-        url : '', refresh : true, unlock: true,
-      }
-      this.lockButton=this.lockButton.bind(this)
+      this.state = {}
     }
+    static contextType = StylesProvider;
 
-    // Button pressed
-    clicked = () => {
-        if(this.state.unlock) {
-            let url = "/recp?ing1=" + this.state.inp1 + "&ing2=" + this.state.inp2 + "&ing3=" + this.state.inp3;
-            this.setState({url : url, inp1 : '', inp2 : '', inp3 : '', refresh : !this.state.refresh});
-        }
-    }
+    defineWhatToRender() {
+        var styles = this.context;
+        let a = false;
+        let shouldShowResults = true;
 
-    // Search on Enter
-    keydownHandler = (e) => {
-        if(e.keyCode===13) {this.clicked()}
-    }
-    componentDidMount(){
-        document.addEventListener('keydown',this.keydownHandler);
-    }
-    componentWillUnmount(){
-        document.removeEventListener('keydown',this.keydownHandler);
-    }
-
-    // Handle ingredients
-    handleUserInput = (e) => {
-        const name = e.target.name;
-        var value = e.target.value.toLowerCase();
-        if (value.length > 15) {
-        value = value.substr(0, 15);
-        }
-        this.setState({[name]: value});
-        if (this.state.inp1==='') {this.setState({inp3: '', inp2: ''})};
-        if (this.state.inp2==='') {this.setState({inp3: ''})};
-    }
-
-    lockButton(t) {
-        this.setState({unlock: t});
-    }
-
-    //----------------------------------------------------------------------------------------------------------------------------------------------
-    //-------R-E-N-D-E-R-I-N-G-!-!-!----------------------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------------------------------------------------
-
-    render() {
-        egg(this.state.inp1, this.state.inp2, this.state.inp3)
-        return (
-            <div>
-                {/* Рецепт */}
-                <Recipe url = {this.state.url} refresh = {this.state.refresh} lockButton={this.lockButton} />
-        
-                <div class="row"> 
-        
-                    {/* Кнопка */}
-                    <div class="col-lg-3 col-12" >
-                        <button class="btn btn-outline-secondary " type="button" onClick={this.clicked}>Search recipe</button>
+        if( a ) {
+            // TODO - BadBatch
+            return
+        } else if( a ) {
+            // TODO - RecipeFull
+            return
+        } else {
+            return(
+                <div className="main-grid" style={styles.mainGrid}>
+                    <div className="main-grid-left" style={styles.mainGridLeft}>
+                        <Search />
                     </div>
-        
-                    {/* Поле ввода 1 */}
-                    <div class="col-lg-3 col-12">
-                        <input name="inp1" type="text" class="form-control elem" placeholder="Add ingredient"
-                        value={this.state.inp1}
-                        onChange={this.handleUserInput} 
-                        />
-                    </div>
-                
-                    {/* Поле ввода 2 */}
-                    <div class={stylo2(this.state.inp1)}>
-                        <input name="inp2" type="text" class="form-control" placeholder="Add ingredient"
-                        value={this.state.inp2}
-                        onChange={this.handleUserInput} 
-                        />
-                    </div>
-        
-                    {/* Поле ввода 3 */}
-                    <div class={stylo3(this.state.inp1, this.state.inp2)}>
-                        <input name="inp3" type="text" class="form-control" placeholder="Add ingredient"
-                        value={this.state.inp3}
-                        onChange={this.handleUserInput} 
-                        />
+                    <div className="main-grid-right" style={styles.mainGridRight}>
+                        {this.defineWhatToRenderOnRight(shouldShowResults)}
                     </div>
                 </div>
-                
-            </div>
-        );
+            )
+        }
+    }
+
+    defineWhatToRenderOnRight(shouldShowResults) {
+        if(shouldShowResults) {
+            return(
+                <Results />
+            )
+        } else {
+            // TODO - Recipe
+            return
+        }
+    }
+
+    render() {
+        var styles = this.context;
+        return(
+            <div style={styles.app}>
+                <div>
+                    {this.defineWhatToRender()}
+                    <div style={styles.fullWidth}>
+                        <div class="bottom-credentials">
+                            <a href="https://github.com/DenisKuivalainen/softdevproj" class="bottom-text">2020   &#169;   Godlike</a>
+                        </div>
+                    </div> 
+                </div>               
+            </div>              
+        )
     }
 }
+
 export default Main;
