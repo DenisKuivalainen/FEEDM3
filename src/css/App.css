@@ -3,6 +3,10 @@
     src: url(lumberjack.regular.otf);
 }
 
+.app {
+    transition: 0.5s;
+}
+
 .recipe-box {
     display: inline-block;
     -webkit-box-sizing: content-box;
@@ -125,4 +129,21 @@
     color: #1e394f;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
+    transition: 0.3s;
+}
+.bottom-text:hover {
+    color: #6ba1c7;
+    transition: 0.3s;
+}
+
+.main-grid-left {
+    transition: 0.5s;
+}
+
+.left-grid {
+    transition: 0.5s;
+}
+
+.right-grid {
+    transition: 0.5s;
 }

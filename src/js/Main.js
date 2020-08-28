@@ -13,6 +13,18 @@ class Main extends React.Component {
     }
     static contextType = StylesProvider;
 
+    setSelectedRecipe = (selected) => {
+        this.props.setSelectedRecipe(selected);
+    }
+
+    setIngredients = (ingredients) => {
+        this.props.setIngredients(ingredients);
+    }
+
+    setFirst = (first) => {
+        this.props.setFirst(first);
+    }
+
     defineWhatToRender() {
         var styles = this.context;
         let a = false;
@@ -22,13 +34,16 @@ class Main extends React.Component {
             // TODO - BadBatch
             return
         } else if( a ) {
-            // TODO - RecipeFull
+            // TODO - Recipe (full)
             return
         } else {
             return(
                 <div className="main-grid" style={styles.mainGrid}>
                     <div className="main-grid-left" style={styles.mainGridLeft}>
-                        <Search />
+                        <Search 
+                            setIngredients={this.setIngredients}
+                            setFirst={this.setFirst}
+                        />
                     </div>
                     <div className="main-grid-right" style={styles.mainGridRight}>
                         {this.defineWhatToRenderOnRight(shouldShowResults)}
@@ -52,7 +67,7 @@ class Main extends React.Component {
     render() {
         var styles = this.context;
         return(
-            <div style={styles.app}>
+            <div className="app" style={styles.app}>
                 <div>
                     {this.defineWhatToRender()}
                     <div style={styles.fullWidth}>
