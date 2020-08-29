@@ -3,7 +3,6 @@ const { Client } = require('pg');
 const db = require('./db');
 const qwr = require('./query')
 const path = require('path');
-const fs = require('fs');
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -16,18 +15,19 @@ const cred = {
 
 const errRes = {
     top: 'No results...',
-  dis: 'Sorry, no results were found... Please, try again... You cannot give up just yet... Stay DETERMINED!!!' 
+    dis: 'Sorry, no results were found... Please, try again... You cannot give up just yet... Stay DETERMINED!!!',
+    pic: ''
 }
  
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('/recp', function (req, res) {
+app.get('/recipe', function (req, res) {
     let client = new Client(cred);
     client.connect();
 
-    let text = qwr.t(req);
-    let values = qwr.v(req);
+    let text = qwr.browserQuery();
+    let values = qwr.browserVariables(req);
     
 
     client.query(text, values, (err, resp) => {
@@ -35,19 +35,38 @@ app.get('/recp', function (req, res) {
             console.log(err);
         }
         client.end();
-        res.send(JSON.stringify((resp.rows[0] !== undefined) ? resp.rows[0] : errRes));
-    });
-});
 
-app.get('/check', function (req, res) {
-    res.send(req.ip);
+        var toClient = {};
+
+        if (resp.rows[0] !== undefined) {
+            let count = resp.rows[0].total;
+            let recipes = resp.rows.map(val => {
+                return {
+                    top: val.top,
+                    dis: val.dis,
+                    pic: val.pic
+                };
+            });
+            toClient = {
+                count: count,
+                recps: recipes
+            };
+        } else {
+            toClient = {
+                count: 1,
+                recps: errRes
+            };
+        }
+        
+        res.send(JSON.stringify(toClient));
+    });
 });
 
 app.get('/vue', function (req, res) {
     let client = new Client(cred);
     client.connect();
 
-    let text = qwr.t(req);
+    let text = qwr.t();
     let values = qwr.v(req);
     
 

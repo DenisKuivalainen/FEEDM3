@@ -16,7 +16,7 @@ class App extends React.Component {
             jsonData: {},
             selectedRecipe: {},
             ingredients: '',
-            firstRecipe: '',
+            firstRecipe: 0,
             unlockSearchButton: true,
         }
         this.getScreenParametors = this.getScreenParametors.bind(this);
@@ -24,7 +24,6 @@ class App extends React.Component {
 
     setFirst = (first) => {
         this.setState({firstRecipe: first});
-        console.log(first)
     }
 
     setSelectedRecipe = (selected) => {
@@ -42,6 +41,7 @@ class App extends React.Component {
         let rows = this.getNumberOfRows(vw, vh);
         let rightK = this.calculateRightCoefficient(rows, vw, vh);
         let widthGreaterThanHeight = this.checkWidthAndHeight(vw, vh);
+        let first = this.state.firstRecipe / (rows * 3);
         
         this.setState({
             vw: vw,
@@ -49,6 +49,7 @@ class App extends React.Component {
             rows: rows,
             rightK: rightK,
             widthGreater: widthGreaterThanHeight,
+            firstRecipe: first,
         })
     }
 

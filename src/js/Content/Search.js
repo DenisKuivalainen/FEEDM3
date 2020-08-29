@@ -15,10 +15,10 @@ class Search extends React.Component {
 
     clicked = () => {
         if(this.context.unlockSearchButton) {
-            let url = "ing1=" + this.state.inp1 + "&ing2=" + this.state.inp2 + "&ing3=" + this.state.inp3;
-            this.setState({inp1 : '', inp2 : '', inp3 : ''});
+            let url = "ing1=" + this.state.input1 + "&ing2=" + this.state.input2 + "&ing3=" + this.state.input3;
+            this.setState({input1 : '', input2 : '', input3 : ''});
             this.props.setIngredients(url);
-            this.props.setFirst('');
+            this.props.setFirst(0);
         }
     }
 
@@ -35,17 +35,19 @@ class Search extends React.Component {
 
     render() {
         var styles = this.context;
-        var inp1 = this.state.input1;
-        var inp2 = this.state.input2;
-        var inp3 = this.state.input3;
+        var input1 = this.state.input1;
+        var input2 = this.state.input2;
+        var input3 = this.state.input3;
 
-        if (inp1==='' && (inp2 !== '' || inp3 !== '')) {
-            this.setState({input1: inp2, input2: inp3, input3: ''});
+        var inputFields = ["input1", "input2", "input3"]
+
+        if (input1==='' && (input2 !== '' || input3 !== '')) {
+            this.setState({input1: input2, input2: input3, input3: ''});
             document.getElementsByName("input1")[0].blur();
         }
 
-        if (inp2==='' && inp3 !== '') {
-            this.setState({input2: inp3, input3: ''});
+        if (input2==='' && input3 !== '') {
+            this.setState({input2: input3, input3: ''});
             document.getElementsByName("input2")[0].blur();
         }
 
@@ -62,27 +64,20 @@ class Search extends React.Component {
                         Search recipe
                     </div>
                 </div>
-                <div className="left-item-grid" style={styles.leftItemGrid}>
-                    <input class="ing-input" placeholder="Add ingredient" 
-                        name="input1"
-                        value={inp1}
-                        onChange={this.handleUserInput} 
-                    />
-                </div>
-                <div className="left-item-grid" style={styles.leftItemGrid}>
-                    <input class="ing-input" placeholder="Add ingredient" 
-                        name="input2"
-                        value={inp2}
-                        onChange={this.handleUserInput} 
-                    />
-                </div>
-                <div className="left-item-grid" style={styles.leftItemGrid}>
-                    <input class="ing-input" placeholder="Add ingredient" 
-                        name="input3"
-                        value={inp3}
-                        onChange={this.handleUserInput} 
-                    />
-                </div>
+                {inputFields.map((val, k) => {
+                    let activeCheck = eval("input" + (k > 0 ? k : 1)) !== '' || val === "input1";
+                    return(
+                        <div className="left-item-grid" key={k} style={styles.leftItemGrid}>
+                            <input class="ing-input" placeholder="Add ingredient" 
+                                name={val}
+                                value={eval(val)}
+                                onChange={this.handleUserInput} 
+                                style={{opacity: activeCheck ? 1 : 0}}
+                                disabled={activeCheck ? "" : "disabled"}
+                            />
+                        </div>
+                    )
+                })}
             </div>
         )
     }
