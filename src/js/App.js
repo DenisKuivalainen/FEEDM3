@@ -13,17 +13,19 @@ class App extends React.Component {
             rows: 0,
             rightK: 0,
             widthGreater: false,
-            jsonData: {},
+            jsonData: [],
             selectedRecipe: {},
             ingredients: '',
             firstRecipe: 0,
+            ammountOfPages: 0,
             unlockSearchButton: true,
+            alreadyClicked: false,
         }
         this.getScreenParametors = this.getScreenParametors.bind(this);
     }
 
     setFirst = (first) => {
-        this.setState({firstRecipe: first});
+       if(first !== this.state.firstRecipe) { this.setState({firstRecipe: first});}
     }
 
     setSelectedRecipe = (selected) => {
@@ -31,7 +33,11 @@ class App extends React.Component {
     }
 
     setIngredients = (ingredients) => {
-        this.setState({ingredients: ingredients});
+        this.setState({
+            ingredients: ingredients,
+            firstRecipe: 0,
+            alreadyClicked: true
+        });
     }
 
     getScreenParametors() {
@@ -41,16 +47,22 @@ class App extends React.Component {
         let rows = this.getNumberOfRows(vw, vh);
         let rightK = this.calculateRightCoefficient(rows, vw, vh);
         let widthGreaterThanHeight = this.checkWidthAndHeight(vw, vh);
-        let first = this.state.firstRecipe / (rows * 3);
+        let firstDevider = rows !== 0 ? rows : 1;
+        let first = this.state.firstRecipe / (firstDevider * 3);
         
         this.setState({
             vw: vw,
             vh: vh,
-            rows: rows,
             rightK: rightK,
             widthGreater: widthGreaterThanHeight,
-            firstRecipe: first,
         })
+
+        if(rows !== this.state.rows || first !== this.state.firstRecipe) {
+            this.setState({
+                rows: rows,
+                firstRecipe: first,
+            })
+        }
     }
 
     checkWidthAndHeight(vw, vh) {
@@ -105,6 +117,8 @@ class App extends React.Component {
             ingredients: this.state.ingredients,
             firstRecipe: this.state.firstRecipe,
             unlockSearchButton: this.state.unlockSearchButton,
+            ammountOfPages: this.state.ammountOfPages,
+
             app: {
                 visibility: vw > 0 ? "visible" : "hidden",
                 overflow: "hidden",
@@ -182,6 +196,10 @@ class App extends React.Component {
             recipeBox: {
                 width: ftth((ftth(vw*rk) - ftth(vh* 0.05)) / rows) - ftth(vh * 0.03) - 20,
                 height: ftth((vh - ftth(vh* 0.15)) / 3) - ftth(vh * 0.03) - 20
+            },
+            recipeImage: {
+                width: ftth((ftth(vw*rk) - ftth(vh* 0.05)) / rows) - ftth(vh * 0.03) - 20,
+                height: (ftth((vh - ftth(vh* 0.15)) / 3) - ftth(vh * 0.03) - 40) /2
             }
         }
     }
@@ -201,12 +219,35 @@ class App extends React.Component {
     componentDidMount() {
         window.addEventListener('resize', this.getScreenParametors);
         window.addEventListener('load', this.getScreenParametors);
-      }
+    }
     
-      componentWillUnmount() {
+    componentWillUnmount() {
         window.removeEventListener('resize', this.getScreenParametors);
         window.removeEventListener('load', this.getScreenParametors);
-      }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        let url = this.getUrlLink(this.state.ingredients, this.state.rows * 3, this.state.firstRecipe);
+
+        let oldUrl = this.getUrlLink(prevState.ingredients, prevState.rows * 3, prevState.firstRecipe);
+
+        if(url !== oldUrl && this.state.alreadyClicked) {
+            this.setState({unlockSearchButton: false});
+
+            fetch(url).then(res => res.json()).then(json => {
+                console.log(json);
+                this.setState({
+                    unlockSearchButton: true,
+                    ammountOfPages: json.count,
+                    jsonData: json.recps
+                });
+            });
+        }
+    }
+
+    getUrlLink(ings, rows, first) {
+        return '/recipe?' + ings + '&rows=' + rows + '&first=' + first;
+    }
 }
 
 export default App;

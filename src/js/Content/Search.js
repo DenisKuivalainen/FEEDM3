@@ -18,7 +18,6 @@ class Search extends React.Component {
             let url = "ing1=" + this.state.input1 + "&ing2=" + this.state.input2 + "&ing3=" + this.state.input3;
             this.setState({input1 : '', input2 : '', input3 : ''});
             this.props.setIngredients(url);
-            this.props.setFirst(0);
         }
     }
 

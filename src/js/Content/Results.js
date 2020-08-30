@@ -13,15 +13,13 @@ class Results extends React.Component {
         var styles = this.context;
         return(
             <div className="right-grid" style={styles.rightGrid}>
-                <div className="right-item-grid" style={styles.rightItemGrid}>
-                    <CardItem styles={styles}/>
-                </div>
-                <div className="right-item-grid" style={styles.rightItemGrid}>
-                    <CardItem styles={styles}/>
-                </div>
-                <div className="right-item-grid" style={styles.rightItemGrid}>
-                    <CardItem styles={styles}/>
-                </div>
+                {styles.jsonData.map((val, k) => {
+                    return(
+                        <div className="right-item-grid" key={k} style={styles.rightItemGrid}>
+                                <CardItem styles={styles} recipe={val}/>
+                        </div>
+                    )
+                })}
             </div>
         )
     }

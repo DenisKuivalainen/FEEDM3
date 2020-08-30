@@ -39,17 +39,15 @@ app.get('/recipe', function (req, res) {
         var toClient = {};
 
         if (resp.rows[0] !== undefined) {
-            let count = resp.rows[0].total;
-            let recipes = resp.rows.map(val => {
-                return {
-                    top: val.top,
-                    dis: val.dis,
-                    pic: val.pic
-                };
-            });
             toClient = {
-                count: count,
-                recps: recipes
+                count: Math.ceil(eval(resp.rows[0].total / values[3])),
+                recps: resp.rows.map(val => {
+                    return {
+                        top: val.top,
+                        dis: val.dis,
+                        pic: val.pic
+                    };
+                }),
             };
         } else {
             toClient = {
