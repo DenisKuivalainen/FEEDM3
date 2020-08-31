@@ -16,7 +16,7 @@ const cred = {
 const errRes = {
     top: 'No results...',
     dis: 'Sorry, no results were found... Please, try again... You cannot give up just yet... Stay DETERMINED!!!',
-    pic: ''
+    pic: 'https://st3.depositphotos.com/8687680/16636/i/450/depositphotos_166369074-stock-photo-glitch-psychedelic-background-old-tv.jpg'
 }
  
 app.use(express.static(__dirname));
@@ -52,7 +52,7 @@ app.get('/recipe', function (req, res) {
         } else {
             toClient = {
                 count: 1,
-                recps: errRes
+                recps: [errRes]
             };
         }
         

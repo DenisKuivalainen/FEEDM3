@@ -44,11 +44,11 @@ class App extends React.Component {
         let vw = document.documentElement.clientWidth;
         let vh = document.documentElement.clientHeight;
 
-        let rows = this.getNumberOfRows(vw, vh);
+        let rows = this.getNumberOfRows(vw / vh);
         let rightK = this.calculateRightCoefficient(rows, vw, vh);
         let widthGreaterThanHeight = this.checkWidthAndHeight(vw, vh);
-        let firstDevider = rows !== 0 ? rows : 1;
-        let first = this.state.firstRecipe / (firstDevider * 3);
+        let firstDevider = (rows !== 0 ? rows : 1) * 3;
+        let first = Math.floor(this.state.firstRecipe / firstDevider) * firstDevider;
         
         this.setState({
             vw: vw,
@@ -73,11 +73,9 @@ class App extends React.Component {
         switch (rows) {
             case 1:
                 return 0.5;
-                return (2 / 9 + vh / (vw * 30));
 
             case 2:
                 return 3 / 5;
-                return (4 / 9 + vh / (vw * 60));
 
             case 3:
                 return 2 / 3;
@@ -87,9 +85,7 @@ class App extends React.Component {
         }
     }
 
-    getNumberOfRows(vw, vh) {
-        let k = vw / vh;
-
+    getNumberOfRows(k) {
         if(k >= 0.75 && k < 1.15) {
             return 1;
         } else if(k >= 1.15 && k < 1.5) {
@@ -108,6 +104,8 @@ class App extends React.Component {
         let rk = this.state.rightK;
         let lk = 1 - rk;
         let urlIsIdentified = this.state.ingredients !== '';
+
+        let rg = (vh - (ftth((vh - ftth(vh* 0.15)))) - ftth(vh* 0.05)) / 2;
 
         return {
             rows: rows,
@@ -181,7 +179,26 @@ class App extends React.Component {
                 flexGrow: 0,
                 maxWidth: vw,
                 width: vw,
+                height: rg,
                 boxSizing: "border-box",
+                bottom: 0,
+                paddingTop: rg * 0.5,
+                fontSize: rg * 0.4,
+            },
+            pageSwitchButtons: {
+                height: rg,
+                boxSizing: "border-box",
+                bottom: rg,
+                padding: 5,
+                display: "flex", 
+                justifyContent: "flex-end",
+            },
+            pageSwitchButton: {
+                flexGrow: 0,
+                width: rg - 20,
+                height: rg - 20,
+                fontSize: rg - 20,
+                marginRight: ftth(vh* 0.05),
             },
             boxGrid: {
                 flexGrow: 0,
@@ -235,7 +252,6 @@ class App extends React.Component {
             this.setState({unlockSearchButton: false});
 
             fetch(url).then(res => res.json()).then(json => {
-                console.log(json);
                 this.setState({
                     unlockSearchButton: true,
                     ammountOfPages: json.count,

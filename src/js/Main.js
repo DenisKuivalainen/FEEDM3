@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import Search from './Content/Search';
 import Results from './Content/Results';
 // import BadBatch from './Content/BadBatch';
@@ -64,17 +64,62 @@ class Main extends React.Component {
         }
     }
 
+    renderPageSwitchButtons() {
+        if(
+            this.context.ammountOfPages > 1 &&
+            this.context.selectedRecipe !== {}
+        ) {
+            let back = (this.context.firstRecipe / ((this.context.rows !== 0 ? this.context.rows : 1) * 3) - 1 >= 0) ? 1: 0;
+            let forward = (this.context.firstRecipe / ((this.context.rows !== 0 ? this.context.rows : 1) * 3) + 1 < this.context.ammountOfPages) ? 1 : 0;
+            return(
+                <div class="bottom-credentials" style={this.context.pageSwitchButtons}>
+                    <div 
+                        class="page-switch-button" 
+                        style={Object.assign({
+                            opacity: back,
+                        }, this.context.pageSwitchButton)}
+                        onClick={() => this.switchPageBack()}
+                    >
+                        &#60;
+                    </div>
+                    <div 
+                        class="page-switch-button" 
+                        style={Object.assign(this.context.pageSwitchButton, {
+                            opacity: forward,
+                        })}
+                        onClick={() => this.switchPageForward()}
+                    >
+                        &#62;
+                    </div>
+                </div>
+            )
+        }
+    }
+
+    switchPageBack = () => {
+        let rows = (this.context.rows !== 0 ? this.context.rows : 1) * 3;
+        if(this.context.firstRecipe / rows - 1 >= 0 && this.context.unlockSearchButton) {
+            this.setFirst(this.context.firstRecipe - rows);
+        }
+    }
+
+    switchPageForward = () => {
+        let rows = (this.context.rows !== 0 ? this.context.rows : 1) * 3;
+        if(this.context.firstRecipe / rows + 1 < this.context.ammountOfPages & this.context.unlockSearchButton) {
+            this.setFirst(this.context.firstRecipe + rows);
+        }
+    }
+
     render() {
         var styles = this.context;
         return(
             <div className="app" style={styles.app}>
                 <div>
                     {this.defineWhatToRender()}
-                    <div style={styles.fullWidth}>
-                        <div class="bottom-credentials">
-                            <a href="https://github.com/DenisKuivalainen/softdevproj" class="bottom-text">2020   &#169;   Godlike</a>
-                        </div>
-                    </div> 
+                    {this.renderPageSwitchButtons()}
+                    <div class="bottom-credentials" style={styles.fullWidth}>
+                        <a href="https://github.com/DenisKuivalainen/softdevproj" class="bottom-text">2020   &#169;   Godlike</a>
+                    </div>
                 </div>               
             </div>              
         )

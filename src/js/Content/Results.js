@@ -16,7 +16,7 @@ class Results extends React.Component {
                 {styles.jsonData.map((val, k) => {
                     return(
                         <div className="right-item-grid" key={k} style={styles.rightItemGrid}>
-                                <CardItem styles={styles} recipe={val}/>
+                                <CardItem styles={styles} recipe={val} />
                         </div>
                     )
                 })}
