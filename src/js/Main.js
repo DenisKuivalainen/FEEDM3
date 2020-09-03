@@ -1,9 +1,8 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import Search from './Content/Search';
 import Results from './Content/Results';
-// import BadBatch from './Content/BadBatch';
-// import RecipeFull from './Content/RecipeFull';
-// import Recipel from './Content/Recipe';
+import BadBatch from './Content/BadBatch';
+import Recipe from './Content/Recipe';
 import {StylesProvider} from './Utility/StylesProvider';
 
 class Main extends React.Component {
@@ -27,47 +26,31 @@ class Main extends React.Component {
 
     defineWhatToRender() {
         var styles = this.context;
-        let a = false;
-        let shouldShowResults = true;
 
-        if( a ) {
-            // TODO - BadBatch
-            return
-        } else if( a ) {
-            // TODO - Recipe (full)
-            return
+        if( styles.rows === 0 ) { // If the screen resolution is too wide or too tall
+            return <BadBatch />;
+        } else if(styles.selectedRecipe.top !== '') {
+            return <Recipe setFirst={this.setFirst}/>
         } else {
             return(
                 <div className="main-grid" style={styles.mainGrid}>
                     <div className="main-grid-left" style={styles.mainGridLeft}>
                         <Search 
                             setIngredients={this.setIngredients}
-                            setFirst={this.setFirst}
                         />
                     </div>
                     <div className="main-grid-right" style={styles.mainGridRight}>
-                        {this.defineWhatToRenderOnRight(shouldShowResults)}
+                        <Results setSelectedRecipe={this.setSelectedRecipe}/>
                     </div>
                 </div>
-            )
-        }
-    }
-
-    defineWhatToRenderOnRight(shouldShowResults) {
-        if(shouldShowResults) {
-            return(
-                <Results />
-            )
-        } else {
-            // TODO - Recipe
-            return
+            );
         }
     }
 
     renderPageSwitchButtons() {
         if(
             this.context.ammountOfPages > 1 &&
-            this.context.selectedRecipe !== {}
+            this.context.selectedRecipe !== {} // additional check cuz buttons are part of higher div09op
         ) {
             let back = (this.context.firstRecipe / ((this.context.rows !== 0 ? this.context.rows : 1) * 3) - 1 >= 0) ? 1: 0;
             let forward = (this.context.firstRecipe / ((this.context.rows !== 0 ? this.context.rows : 1) * 3) + 1 < this.context.ammountOfPages) ? 1 : 0;
@@ -117,7 +100,7 @@ class Main extends React.Component {
                 <div>
                     {this.defineWhatToRender()}
                     {this.renderPageSwitchButtons()}
-                    <div class="bottom-credentials" style={styles.fullWidth}>
+                    <div className="bottom-credentials" style={styles.fullWidth}>
                         <a href="https://github.com/DenisKuivalainen/softdevproj" class="bottom-text">2020   &#169;   Godlike</a>
                     </div>
                 </div>               

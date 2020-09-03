@@ -15,7 +15,7 @@ class Search extends React.Component {
 
     clicked = () => {
         if(this.context.unlockSearchButton) {
-            let url = "ing1=" + this.state.input1 + "&ing2=" + this.state.input2 + "&ing3=" + this.state.input3;
+            let url = "ing1=" + this.state.input1 + "&ing2=" + this.state.input2 + "&ing3=" + this.state.input3; // part of URL for API call
             this.setState({input1 : '', input2 : '', input3 : ''});
             this.props.setIngredients(url);
         }
@@ -63,7 +63,8 @@ class Search extends React.Component {
                         Search recipe
                     </div>
                 </div>
-                {inputFields.map((val, k) => {
+                { // map to avoid writing 3 simmilar elements
+                inputFields.map((val, k) => {
                     let activeCheck = eval("input" + (k > 0 ? k : 1)) !== '' || val === "input1";
                     return(
                         <div className="left-item-grid" key={k} style={styles.leftItemGrid}>

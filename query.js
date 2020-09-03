@@ -8,9 +8,13 @@ function browserQuery() {
 }
 
 function mobileVariables(req) {
-    let i1 = "%" + req.query.ing1 + "%";
-    let i2 = "%" + req.query.ing2 + "%";
-    let i3 = "%" + req.query.ing3 + "%";
+    let ing1 = req.query.ing1;
+    let ing2 = req.query.ing2;
+    let ing3 = req.query.ing3;
+
+    let i1 = ing1 !== undefined ? "%" + ing1 + "%" : '%';
+    let i2 = ing2 !== undefined ? "%" + ing2 + "%" : '%';
+    let i3 = ing3 !== undefined ? "%" + ing3 + "%" : '%';
 
     return [i1, i2, i3];
 }
@@ -22,11 +26,12 @@ function browserVariables(req) {
     let r = req.query.rows;
     let f = req.query.first;
 
+    // to avoid huge if-else constructions in return-query functions
     let i1 = ing1 !== undefined ? "%" + ing1 + "%" : '%';
     let i2 = ing2 !== undefined ? "%" + ing2 + "%" : '%';
     let i3 = ing3 !== undefined ? "%" + ing3 + "%" : '%';
-    let rows = r !== undefined ? r : 100;
-    let first = f !== undefined ? f : 0;
+    let rows = r !== undefined ? r : 100; // maximum ammount of results
+    let first = f !== undefined ? f : 0; // number of first result to get
 
     return [i1, i2, i3, rows, first];
 }

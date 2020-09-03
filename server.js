@@ -22,6 +22,7 @@ const errRes = {
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
 
+// API for web app
 app.get('/recipe', function (req, res) {
     let client = new Client(cred);
     client.connect();
@@ -29,7 +30,6 @@ app.get('/recipe', function (req, res) {
     let text = qwr.browserQuery();
     let values = qwr.browserVariables(req);
     
-
     client.query(text, values, (err, resp) => {
         if (err) {
             console.log(err);
@@ -38,7 +38,7 @@ app.get('/recipe', function (req, res) {
 
         var toClient = {};
 
-        if (resp.rows[0] !== undefined) {
+        if (resp.rows[0] !== undefined) { // checks if any results
             toClient = {
                 count: Math.ceil(eval(resp.rows[0].total / values[3])),
                 recps: resp.rows.map(val => {
@@ -60,6 +60,7 @@ app.get('/recipe', function (req, res) {
     });
 });
 
+// API for mobile app
 app.get('/vue', function (req, res) {
     let client = new Client(cred);
     client.connect();
@@ -77,6 +78,7 @@ app.get('/vue', function (req, res) {
     });
 });
 
+// download mobile app
 app.get('/download', function (req, res) {
     let file = "FEEDM3.apk";
     let fPath = path.join(__dirname, file);

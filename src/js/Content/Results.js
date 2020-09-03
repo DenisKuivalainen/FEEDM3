@@ -8,6 +8,10 @@ class Results extends React.Component {
       this.state = {}
     }
     static contextType = StylesProvider;
+    
+    setSelectedRecipe = (selected) => {
+        this.props.setSelectedRecipe(this.context.jsonData[selected]);
+    }
 
     render() {
         var styles = this.context;
@@ -16,7 +20,12 @@ class Results extends React.Component {
                 {styles.jsonData.map((val, k) => {
                     return(
                         <div className="right-item-grid" key={k} style={styles.rightItemGrid}>
-                                <CardItem styles={styles} recipe={val} />
+                            <CardItem
+                                styles={styles} 
+                                recipe={val} 
+                                searchNumber={k} 
+                                setSelectedRecipe={this.setSelectedRecipe}
+                            />
                         </div>
                     )
                 })}

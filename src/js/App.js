@@ -12,14 +12,19 @@ class App extends React.Component {
             vh: 0,
             rows: 0,
             rightK: 0,
-            widthGreater: false,
-            jsonData: [],
-            selectedRecipe: {},
-            ingredients: '',
             firstRecipe: 0,
             ammountOfPages: 0,
+
+            widthGreater: false,
             unlockSearchButton: true,
             alreadyClicked: false,
+
+            ingredients: '',
+            selectedRecipeTop: '',
+            selectedRecipeDis: '',
+            selectedRecipePic: '',
+
+            jsonData: [], 
         }
         this.getScreenParametors = this.getScreenParametors.bind(this);
     }
@@ -29,7 +34,11 @@ class App extends React.Component {
     }
 
     setSelectedRecipe = (selected) => {
-        this.setState({selectedRecipe: selected});
+        this.setState({
+            selectedRecipeTop: selected["top"],
+            selectedRecipeDis: selected["dis"],
+            selectedRecipePic: selected["pic"],
+        });
     }
 
     setIngredients = (ingredients) => {
@@ -86,7 +95,7 @@ class App extends React.Component {
     }
 
     getNumberOfRows(k) {
-        if(k >= 0.75 && k < 1.15) {
+        if(k >= 0.65 && k < 1.15) {
             return 1;
         } else if(k >= 1.15 && k < 1.5) {
             return 2;
@@ -111,7 +120,11 @@ class App extends React.Component {
             rows: rows,
             widthGreater: this.state.widthGreater,
             jsonData: this.state.jsonData,
-            selectedRecipe: this.state.selectedRecipe,
+            selectedRecipe: {
+                "top": this.state.selectedRecipeTop,
+                "dis": this.state.selectedRecipeDis,
+                "pic": this.state.selectedRecipePic
+            },
             ingredients: this.state.ingredients,
             firstRecipe: this.state.firstRecipe,
             unlockSearchButton: this.state.unlockSearchButton,
@@ -217,6 +230,52 @@ class App extends React.Component {
             recipeImage: {
                 width: ftth((ftth(vw*rk) - ftth(vh* 0.05)) / rows) - ftth(vh * 0.03) - 20,
                 height: (ftth((vh - ftth(vh* 0.15)) / 3) - ftth(vh * 0.03) - 40) /2
+            },
+            badBatchMain: {
+                marginLeft:  vw * 0.2,
+                marginRight: vw * 0.2,
+                position: "absolute",
+                top: "50%",
+                transform: "translateY(-50%)",
+                width: vw * 0.6,
+            },
+            badBatchText: {
+                marginBottom: vw * 0.05,
+            },
+            badBatchLogo: {
+                width: vw * 0.5,
+                marginLeft: vw * 0.05,
+                marginRight: vw * 0.05,
+                marginBottom: vw * 0.05,
+            },
+            recipeMain: {
+                marginTop: ftth(vh* 0.05),
+                marginLeft: ftth(vh* 0.05),
+                marginRight: ftth(vh* 0.05),
+                width: ftth(vw - vh*0.1),
+                height: vh-rg
+            },
+            recipeBorder: {
+                width: ftth(vw - vh*0.1),
+                height: ftth((vh-rg*3)),
+            },
+            recipePic: {
+                marginTop: ftth(vh* 0.05),
+                marginLeft: ftth(vh* 0.05),
+                width: ftth(vw - vh*0.1) - ftth(vh* 0.1),
+                height: ftth((ftth(vh-rg*3) - ftth(vh* 0.1)) * 0.3),
+            },
+            recipeName: {
+                marginTop: ftth(vh* 0.05),
+                marginLeft: ftth(vh* 0.05),
+                width: ftth(vw - vh*0.1) - ftth(vh* 0.1),
+                fontSize: ftth((ftth(vh-rg*3) - ftth(vh* 0.1)) * 0.07),
+            },
+            recipeDesc: {
+                marginTop: ftth(vh* 0.03),
+                marginLeft: ftth(vh* 0.07),
+                width: ftth(vw - vh*0.1) - ftth(vh* 0.14),
+                fontSize: ftth((ftth((vh-rg*3)) - ftth(vh* 0.08) - (ftth((ftth(vh-rg*3) - ftth(vh* 0.1)) * 0.07) + ftth(vh* 0.05)) - ftth((ftth(vh-rg*3) - ftth(vh* 0.1)) * 0.3))/17),
             }
         }
     }

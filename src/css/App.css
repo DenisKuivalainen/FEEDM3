@@ -202,3 +202,29 @@
 .right-grid {
     transition: 0.5s;
 }
+
+.bad-batch-text {
+    font-size: 30px;
+    font-family: Mono;
+    letter-spacing: 1;
+    text-align: justify;
+}
+
+.recipe-border {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    overflow: hidden;
+    border: 1px solid #6ba1c7;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    text-align: center;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.recipe-name {
+    color: #1e394f;
+    font-family: Mono;
+    text-align: justify;
+}

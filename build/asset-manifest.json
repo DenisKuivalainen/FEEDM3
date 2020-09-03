@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.7b94c42e.chunk.css",
-    "main.js": "/static/js/main.37cd7601.chunk.js",
-    "main.js.map": "/static/js/main.37cd7601.chunk.js.map",
+    "main.css": "/static/css/main.b0e55ad3.chunk.css",
+    "main.js": "/static/js/main.1c837949.chunk.js",
+    "main.js.map": "/static/js/main.1c837949.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.bbcc582e.js",
     "runtime-main.js.map": "/static/js/runtime-main.bbcc582e.js.map",
-    "static/js/2.038503fc.chunk.js": "/static/js/2.038503fc.chunk.js",
-    "static/js/2.038503fc.chunk.js.map": "/static/js/2.038503fc.chunk.js.map",
+    "static/js/2.1b253e16.chunk.js": "/static/js/2.1b253e16.chunk.js",
+    "static/js/2.1b253e16.chunk.js.map": "/static/js/2.1b253e16.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.79396439ee5413b58c896f426333b46c.js": "/precache-manifest.79396439ee5413b58c896f426333b46c.js",
+    "precache-manifest.769f1fdbbd66213ea3b75b70316e090e.js": "/precache-manifest.769f1fdbbd66213ea3b75b70316e090e.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.7b94c42e.chunk.css.map": "/static/css/main.7b94c42e.chunk.css.map",
+    "static/css/main.b0e55ad3.chunk.css.map": "/static/css/main.b0e55ad3.chunk.css.map",
     "static/media/App.css": "/static/media/lumberjack.regular.f9b3dd27.otf",
     "static/media/logo.jpg": "/static/media/logo.aff12731.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.bbcc582e.js",
-    "static/js/2.038503fc.chunk.js",
-    "static/css/main.7b94c42e.chunk.css",
-    "static/js/main.37cd7601.chunk.js"
+    "static/js/2.1b253e16.chunk.js",
+    "static/css/main.b0e55ad3.chunk.css",
+    "static/js/main.1c837949.chunk.js"
   ]
 }
