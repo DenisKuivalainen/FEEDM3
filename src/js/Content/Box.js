@@ -1,14 +1,14 @@
 import React from 'react';
 
 export default function CardItem(props) {
-    const setSelectedRecipe = (selected) => {
-        props.setSelectedRecipe(props.styles.jsonData[selected]);
+    const setSelectedRecipe = () => {
+        props.setSelectedRecipe(props.recipe);
     }
 
     return (
         <div class="recipe-box" 
             style={props.styles.recipeBox}
-            onClick={() => setSelectedRecipe(props.searchNumber)}
+            onClick={() => setSelectedRecipe()}
         >
             <div class="recipe-image" 
                 style={Object.assign(props.styles.recipeImage, {

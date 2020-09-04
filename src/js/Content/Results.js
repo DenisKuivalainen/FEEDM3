@@ -10,7 +10,7 @@ class Results extends React.Component {
     static contextType = StylesProvider;
     
     setSelectedRecipe = (selected) => {
-        this.props.setSelectedRecipe(this.context.jsonData[selected]);
+        this.props.setSelectedRecipe(selected);
     }
 
     render() {

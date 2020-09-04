@@ -30,7 +30,7 @@ class Main extends React.Component {
         if( styles.rows === 0 ) { // If the screen resolution is too wide or too tall
             return <BadBatch />;
         } else if(styles.selectedRecipe.top !== '') {
-            return <Recipe setFirst={this.setFirst}/>
+            return <Recipe setSelectedRecipe={this.setSelectedRecipe}/>
         } else {
             return(
                 <div className="main-grid" style={styles.mainGrid}>
@@ -50,7 +50,7 @@ class Main extends React.Component {
     renderPageSwitchButtons() {
         if(
             this.context.ammountOfPages > 1 &&
-            this.context.selectedRecipe !== {} // additional check cuz buttons are part of higher div09op
+            this.context.selectedRecipe.top.length === 0 // additional check cuz buttons are part of higher div09op
         ) {
             let back = (this.context.firstRecipe / ((this.context.rows !== 0 ? this.context.rows : 1) * 3) - 1 >= 0) ? 1: 0;
             let forward = (this.context.firstRecipe / ((this.context.rows !== 0 ? this.context.rows : 1) * 3) + 1 < this.context.ammountOfPages) ? 1 : 0;

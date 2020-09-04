@@ -1,6 +1,5 @@
 import React from 'react';
 import {StylesProvider} from '../Utility/StylesProvider';
-import logo from './logo.jpg';
 
 class Recipe extends React.Component {
     constructor (props) {
@@ -8,6 +7,14 @@ class Recipe extends React.Component {
       this.state = {}
     }
     static contextType = StylesProvider;
+
+    setSelectedRecipe = () => {
+        this.props.setSelectedRecipe({
+            "top": '',
+            "dis": '',
+            "pic": ''
+        });
+    }
 
     render() {
         var styles = this.context;
@@ -26,6 +33,13 @@ class Recipe extends React.Component {
                     <div class="recipe-name" style={styles.recipeDesc}>
                         {styles.selectedRecipe.dis}
                     </div>
+                </div>
+                <div 
+                    class="page-switch-button" 
+                    style={styles.backButton}  
+                    onClick={() => this.setSelectedRecipe()}
+                >
+                    Back &#60;&#60;
                 </div>
             </div>
         )
