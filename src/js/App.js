@@ -56,7 +56,7 @@ class App extends React.Component {
         let rows = this.getNumberOfRows(vw / vh);
         let rightK = this.calculateRightCoefficient(rows, vw, vh);
         let widthGreaterThanHeight = this.checkWidthAndHeight(vw, vh);
-        let firstDevider = (rows !== 0 ? rows : 1) * 3;
+        let firstDevider = (rows !== 0 ? rows : 1) * 3; // to avoid NaN result, which cause errors in styles
         let first = Math.floor(this.state.firstRecipe / firstDevider) * firstDevider;
         
         this.setState({
@@ -66,7 +66,7 @@ class App extends React.Component {
             widthGreater: widthGreaterThanHeight,
         })
 
-        if(rows !== this.state.rows || first !== this.state.firstRecipe) {
+        if(rows !== this.state.rows || first !== this.state.firstRecipe) { // API calls is sent, when this parametors change, so I avoid unnesesary server load
             this.setState({
                 rows: rows,
                 firstRecipe: first,
@@ -133,7 +133,7 @@ class App extends React.Component {
 
         let oldUrl = this.getUrlLink(prevState.ingredients, prevState.rows * 3, prevState.firstRecipe);
 
-        if(url !== oldUrl && this.state.alreadyClicked) {
+        if(url !== oldUrl && this.state.alreadyClicked) { // alreadyClicked is checked to avoid multiple requests
             this.setState({unlockSearchButton: false});
 
             fetch(url).then(res => res.json()).then(json => {

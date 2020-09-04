@@ -27,9 +27,9 @@ class Main extends React.Component {
     defineWhatToRender() {
         var styles = this.context;
 
-        if( styles.rows === 0 ) { // If the screen resolution is too wide or too tall
+        if( styles.rows === 0 ) { // if the screen resolution is too wide or too tall
             return <BadBatch />;
-        } else if(styles.selectedRecipe.top !== '') {
+        } else if(styles.selectedRecipe.top !== '') { // if recipe is selected by user
             return <Recipe setSelectedRecipe={this.setSelectedRecipe}/>
         } else {
             return(
@@ -50,7 +50,7 @@ class Main extends React.Component {
     renderPageSwitchButtons() {
         if(
             this.context.ammountOfPages > 1 &&
-            this.context.selectedRecipe.top.length === 0 // additional check cuz buttons are part of higher div09op
+            this.context.selectedRecipe.top.length === 0 // additional check cuz buttons are part of higher div
         ) {
             let back = (this.context.firstRecipe / ((this.context.rows !== 0 ? this.context.rows : 1) * 3) - 1 >= 0) ? 1: 0;
             let forward = (this.context.firstRecipe / ((this.context.rows !== 0 ? this.context.rows : 1) * 3) + 1 < this.context.ammountOfPages) ? 1 : 0;

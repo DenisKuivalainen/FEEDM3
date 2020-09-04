@@ -12,7 +12,7 @@ export default function CardItem(props) {
         >
             <div class="recipe-image" 
                 style={Object.assign(props.styles.recipeImage, {
-                    background: "url(" + props.recipe.pic + ") 50% 50% / cover padding-box border-box",
+                    background: "url(" + props.recipe.pic + ") 50% 50% / cover padding-box border-box", // TODO: delete picture on jsonData change
                 })}
             />
             {props.recipe.top}

@@ -8,7 +8,7 @@ class Recipe extends React.Component {
     }
     static contextType = StylesProvider;
 
-    setSelectedRecipe = () => {
+    setSelectedRecipe = () => {  // as this element is called when selectedRecipe.top has value
         this.props.setSelectedRecipe({
             "top": '',
             "dis": '',
