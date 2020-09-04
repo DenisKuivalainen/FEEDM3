@@ -6,7 +6,7 @@ import logo from './logo.jpg';
 class Logo extends React.Component {
     render() {
         return (
-            <img src={logo} alt="Logo" class="pict"/>
+            <img src={logo} alt="Logo" style={{width: window.innerWidth/3}} />
         )
     }
  }
