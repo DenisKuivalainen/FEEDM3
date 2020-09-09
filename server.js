@@ -65,8 +65,8 @@ app.get('/vue', function (req, res) {
     let client = new Client(cred);
     client.connect();
 
-    let text = qwr.t();
-    let values = qwr.v(req);
+    let text = qwr.mobileQuery();
+    let values = qwr.mobileVariables(req);
     
 
     client.query(text, values, (err, resp) => {
